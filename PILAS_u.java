@@ -1,6 +1,5 @@
 
 package PILAS;
-
 import java.util.Scanner;
 
 /**
@@ -10,13 +9,18 @@ import java.util.Scanner;
 public class PILAS_u {
     
     Scanner leer=new Scanner(System.in);
-    String pila [] =new String [27];
+    public static PILAS_u metodo= new PILAS_u();
+    
+    char pila [] =new char [27];
+    int Random[] = new int [27];
     int TOPE=0;
+  
+   
     
      public static void main(String[] args) {
          
          Scanner leer2=new Scanner(System.in);
-         PILAS_u metodo= new PILAS_u();
+         
          int OPC;
          do
          {
@@ -25,10 +29,12 @@ public class PILAS_u {
              System.out.print("\n1-MOSTRAR");
              System.out.print("\n2-ELIMINAR");
              System.out.print("\n3-AGREGAR");
-             System.out.print("\n4-LLENAR:  ");
-             System.out.print("\n5-SALIR:  ");
+             System.out.print("\n4-LLENAR");
+             System.out.print("\n5-LLENAR ALEATORIAMENTE");
+             System.out.print("\n6-ORDENAR");
+             System.out.print("\n7-SALIR");
              
-             System.out.print("\nSELECCIONA UNA OPCION:  ");
+             System.out.print("\n\nSELECCIONA UNA OPCION:  ");
             
          switch(OPC=leer2.nextInt())
          {
@@ -51,10 +57,18 @@ public class PILAS_u {
              case 4:
              metodo.Llenar();
              break;
+             
+             case 5:
+             metodo.Aleatorio();
+             break;
+             
+             case 6:
+             metodo.Ordenar();
+             break;
          }
          
          }
-         while(OPC!=5);
+         while(OPC!=7);
          
      
 }
@@ -63,7 +77,7 @@ public class PILAS_u {
          if(TOPE<27)
          {
              System.out.print("INGRESA UN DATO:  ");
-             pila[TOPE]=leer.nextLine();   //A,B,C
+             pila[TOPE]=leer.next().charAt(0);  //A,B,C
              TOPE++;
              
          }
@@ -102,9 +116,11 @@ public class PILAS_u {
          
      }
      
+     
+     
      public void Llenar()
      {
-         String [] U={"A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; //*ARREGLO 
+         char [] U={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'}; //*ARREGLO 
          
          if(TOPE<27) //TOPE= 26,25,24,.....0
          {
@@ -118,16 +134,55 @@ public class PILAS_u {
           while(TOPE<27);   //TOPE=3,4,5,6,7,....,27    28>TOPE
              
          }
-         else
-         {
-             
-         }
-         
                 
      }
+     
+     public void Aleatorio()
+     {    
+         System.out.print("\nDATOS ALEATORIOS INGRESADOS CORRECTAMENTE....\n");
+         System.out.print("\n***PILA DESORDENADA***\n");
+     for(int x=TOPE; x<27; x++)
+     {
+         Random[x]=(int)(Math.random()*25+65);
+         pila[TOPE]=(char)Random[x];
+         TOPE++;
+         System.out.print(pila[x]+" ");  
+         
+     }  
+      System.out.print("\n\n");
 
-    
-     }
+     
+    }
+     
+   public void Ordenar()       
+   {
+       char auxiliar;
+        
+       for(int u=0; u<TOPE; u++)
+       {
+           for(int j=0; j<TOPE-1; j++)
+           {
+               if(pila[j]>pila[j+1])
+               {
+                   auxiliar=pila[j];
+                   pila[j]=pila[j+1];
+                   pila[j+1]=auxiliar;
+  
+               }
+           }
+       }System.out.print("\n***PILA ORDENADA***\n");
+      for(int u=0; u<TOPE; u++)
+       {
+       
+         System.out.print(pila[u]+" ");  
+      
+   } 
+      System.out.print("\n\n");
+
+   }
+}
+        
+     
 
 
      
